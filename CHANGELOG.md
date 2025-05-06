@@ -50,6 +50,7 @@ The format mostly follows [Keep a Changelog](http://keepachangelog.com/en/1.0.0/
 - Fix HTML diff table rendering for long line lengths (#793 by trevorshannon)
 - Fix IndexError after failed edit (#801 by jwilk)
 - Fix concurrency issue in Python 3.12 by upgrading to minidb 2.0.8 (fixes #779)
+- Fix some minors bugs on the tags filter (#843 by Maxime Werlen)
 
 ## [2.28] -- 2023-05-03
 
