@@ -1,4 +1,5 @@
-.\" Man page generated from reStructuredText.
+.\" Man page generated from reStructuredText
+.\" by the Docutils 0.23 manpage writer.
 .
 .
 .nr rst2man-indent-level 0
@@ -27,7 +28,7 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "URLWATCH-JOBS" "5" "Oct 28, 2024" "urlwatch " "urlwatch  Documentation"
+.TH "URLWATCH-JOBS" "5" "Oct 29, 2026" "urlwatch 2.29" "urlwatch 2.29 Documentation"
 .SH NAME
 urlwatch-jobs \- Job types and configuration for urlwatch
 .SH SYNOPSIS
@@ -47,11 +48,9 @@ While optional, it is recommended that each job starts with a \fBname\fP entry:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 name: \(dqThis is a human\-readable name/label of the job\(dq
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -62,12 +61,10 @@ This is the main job type \-\- it retrieves a document from a web server:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 name: \(dqurlwatch homepage\(dq
 url: \(dqhttps://thp.io/2008/urlwatch/\(dq
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -92,9 +89,9 @@ Job\-specific optional keys:
 .IP \(bu 2
 \fBignore_cached\fP: Do not use cache control (ETag/Last\-Modified) values (true/false)
 .IP \(bu 2
-\fBhttp_proxy\fP: Proxy server to use for HTTP requests (might be \fI\%http://\fP or socks5://)
+\fBhttp_proxy\fP: Proxy server to use for HTTP requests (might be \X'tty: link http://'\fI\%http://\fP\X'tty: link' or socks5://)
 .IP \(bu 2
-\fBhttps_proxy\fP: Proxy server to use for HTTPS requests (might be \fI\%http://\fP or socks5://)
+\fBhttps_proxy\fP: Proxy server to use for HTTPS requests (might be \X'tty: link http://'\fI\%http://\fP\X'tty: link' or socks5://)
 .IP \(bu 2
 \fBheaders\fP: HTTP header to send along with the request
 .IP \(bu 2
@@ -121,16 +118,14 @@ require JavaScript to render the content being monitored.
 .sp
 The optional \fIplaywright\fP package must be installed in order to run Browser jobs
 (see \fI\%Dependencies\fP). You will also need to install the browsers using
-\fBplaywright install\fP (see \fI\%Playwright Installation\fP <\fBhttps://playwright.dev/python/docs/intro\fP> for details).
+\fBplaywright install\fP (see \X'tty: link https://playwright.dev/python/docs/intro'\fI\%Playwright Installation\fP <\fBhttps://playwright.dev/python/docs/intro\fP>\X'tty: link' for details).
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 name: \(dqA page with JavaScript\(dq
 navigate: \(dqhttps://example.org/\(dq
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -147,16 +142,18 @@ Job\-specific optional keys:
 \fBcommit\fP (see \fI\%Advanced Topics\fP)
 .IP \(bu 2
 \fBwait_for\fP: A CSS or XPath selector based on the
-: \fI\%https://playwright.dev/python/docs/locators#locate\-by\-css\-or\-xpath\fP
+Playwright Locator: \X'tty: link https://playwright.dev/python/docs/locators#locate-by-css-or-xpath'\fI\%https://playwright.dev/python/docs/locators#locate\-by\-css\-or\-xpath\fP\X'tty: link'
 spec. The job will wait for the default timeout of 30 seconds.
 .IP \(bu 2
 \fBuseragent\fP: \fBUser\-Agent\fP header used for requests (otherwise browser default is used)
 .IP \(bu 2
 \fBbrowser\fP:  Either \fBchromium\fP, \fBchrome\fP, \fBchrome\-beta\fP, \fBmsedge\fP,
 \fBmsedge\-beta\fP, \fBmsedge\-dev\fP, \fBfirefox\fP, \fBwebkit\fP (must be installed with \fBplaywright install\fP)
+.IP \(bu 2
+\fBignore_http_error_codes\fP: List of HTTP errors to ignore (see \fI\%Advanced Topics\fP)
 .UNINDENT
 .sp
-Because this job uses \fI\%Playwright\fP <\fBhttps://playwright.dev/python/\fP> to
+Because this job uses \X'tty: link https://playwright.dev/python/'\fI\%Playwright\fP <\fBhttps://playwright.dev/python/\fP>\X'tty: link' to
 render the page in a headless browser instance, it uses massively more resources
 than a \(dqURL\(dq job. Use it only on pages where \fBurl\fP does not return the correct
 results. In many cases, instead of using a \(dqBrowser\(dq job, you can use the output
@@ -172,12 +169,10 @@ scripts that query external devices (RPi GPIO), etc...
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 name: \(dqWhat is in my Home Directory?\(dq
 command: \(dqls \-al ~\(dq
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -219,15 +214,13 @@ even though the script exits with exit code 0:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 command: |
   echo \(dqNormal standard output.\(dq
   echo \(dqSomething goes to stderr, which makes this job fail.\(dq 1>&2
   exit 0
 stderr: fail
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -235,14 +228,12 @@ On the other hand, if you want to diff both stdout and stderr of the job, use th
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 command: |
   echo \(dqAn important line on stdout.\(dq
   echo \(dqAnother important line on stderr.\(dq 1>&2
 stderr: stdout
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH OPTIONAL KEYS FOR ALL JOB TYPES
@@ -287,7 +278,6 @@ See \fBurlwatch\-cookbook(7)\fP for example job configurations.
 \fBurlwatch(1)\fP,
 \fBurlwatch\-intro(5)\fP,
 \fBurlwatch\-filters(5)\fP
-.SH COPYRIGHT
+.SH Copyright
 2024 Thomas Perl
-.\" Generated by docutils manpage writer.
-.
+.\" End of generated man page.

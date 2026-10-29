@@ -1,4 +1,5 @@
-.\" Man page generated from reStructuredText.
+.\" Man page generated from reStructuredText
+.\" by the Docutils 0.23 manpage writer.
 .
 .
 .nr rst2man-indent-level 0
@@ -27,7 +28,7 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "URLWATCH-COOKBOOK" "7" "Oct 28, 2024" "urlwatch " "urlwatch  Documentation"
+.TH "URLWATCH-COOKBOOK" "7" "Oct 29, 2026" "urlwatch 2.29" "urlwatch 2.29 Documentation"
 .SH NAME
 urlwatch-cookbook \- Advanced topics and recipes for urlwatch
 .SH ADDING URLS FROM THE COMMAND LINE
@@ -36,11 +37,9 @@ Quickly adding new URLs to the job list from the command line:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 urlwatch \-\-add url=http://example.org,name=Example
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH USING WORD-BASED DIFFERENCES
@@ -48,16 +47,14 @@ urlwatch \-\-add url=http://example.org,name=Example
 You can also specify an external \fBdiff\fP\-style tool (a tool that takes
 two filenames (old, new) as parameter and returns on its standard output
 the difference of the files), for example to use \fBwdiff(1)\fP to get
-word\-based differences instead of line\-based difference, or \fI\%pandiff\fP <\fBhttps://github.com/davidar/pandiff\fP> to get markdown differences:
+word\-based differences instead of line\-based difference, or \X'tty: link https://github.com/davidar/pandiff'\fI\%pandiff\fP <\fBhttps://github.com/davidar/pandiff\fP>\X'tty: link' to get markdown differences:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 url: https://example.com/
 diff_tool: wdiff
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -73,11 +70,9 @@ For example:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 diff_tool: \(dqdiff \-\-ignore\-all\-space \-\-unified\(dq
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -92,13 +87,11 @@ In order to show only diff lines with added lines, use:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 url: http://example.com/things\-get\-added.html
 diff_filter:
   \- grep: \(aq^[@+]\(aq
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -107,13 +100,11 @@ to only keep removed lines:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 url: http://example.com/things\-get\-removed.html
 diff_filter:
   \- grep: \(aq^[@\-]\(aq
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -132,8 +123,7 @@ A diff usually looks like this:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 \-\-\- @       Fri, 04 Mar 2022 19:58:14 +0100
 +++ @       Fri, 04 Mar 2022 19:58:22 +0100
 @@ \-1,3 +1,3 @@
@@ -141,8 +131,7 @@ A diff usually looks like this:
 \-someotherlines
 +someotherline
  anotherline
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -152,14 +141,12 @@ which can be accomplished like so:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 url: http://example.com/only\-added.html
 diff_filter:
   \- grep: \(aq^[+]\(aq      # Include all lines starting with \(dq+\(dq
   \- grepi: \(aq^[+]{3}\(aq  # Exclude the line starting with \(dq+++\(dq
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -171,12 +158,10 @@ option to \fBfalse\fP in the \fBdisplay\fP category:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 display:
   empty\-diff: false
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH PASS DIFF OUTPUT TO A CUSTOM SCRIPT
@@ -194,21 +179,19 @@ diff. This can even have a \(dqnormal\(dq filter attached to only watch links
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 url: http://example.org/downloadlist.html
 filter:
   \- css: a
 diff_filter:
   \- shellpipe: /usr/local/bin/process_new_links.sh
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH COMPARING WEB PAGES VISUALLY
 .sp
 To compare the visual contents of web pages, Nicolai has written
-\fI\%pyvisualcompare\fP <\fBhttps://github.com/nspo/pyvisualcompare\fP> as
+\X'tty: link https://github.com/nspo/pyvisualcompare'\fI\%pyvisualcompare\fP <\fBhttps://github.com/nspo/pyvisualcompare\fP>\X'tty: link' as
 a frontend (with GUI) to \fBurlwatch\fP\&. The tool can be used to
 select a region of a web page. It then generates a configuration
 for \fBurlwatch\fP to run \fBpyvisualcompare\fP and generate a hash
@@ -223,26 +206,22 @@ the \fBignore_connection_errors\fP key in the job list configuration file:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 url: https://example.com/
 ignore_connection_errors: true
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
 Similarly, you might want to ignore some (temporary) HTTP errors on the
-server side:
+server side. This can be done for \fBurl\fP or \fBbrowser\fP jobs:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
-url: https://example.com/
+.EX
+url: https://example.com/  # can be \(aqnavigate:\(aq for browser jobs
 ignore_http_error_codes: 408, 429, 500, 502, 503, 504
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -250,12 +229,10 @@ or ignore all HTTP errors if you like:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
-url: https://example.com/
+.EX
+url: https://example.com/  # can be \(aqnavigate:\(aq for browser jobs
 ignore_http_error_codes: 4xx, 5xx
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -263,28 +240,24 @@ You can also ignore incomplete reads:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 url: \(dqhttps://example.com/\(dq
 ignore_incomplete_reads: true
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH OVERRIDING THE CONTENT ENCODING
 .sp
 For web pages with misconfigured HTTP headers or rare encodings, it may
-be useful to explicitly specify an encoding from Python’s \fI\%Standard
-Encodings\fP <\fBhttps://docs.python.org/3/library/codecs.html#standard-encodings\fP>\&.
+be useful to explicitly specify an encoding from Python’s \X'tty: link https://docs.python.org/3/library/codecs.html#standard-encodings'\fI\%Standard
+Encodings\fP <\fBhttps://docs.python.org/3/library/codecs.html#standard-encodings\fP>\X'tty: link'\&.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 url: https://example.com/
 encoding: utf\-8
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH CHANGING THE DEFAULT TIMEOUT
@@ -295,12 +268,10 @@ seconds, or set it to 0 to never timeout.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 url: https://example.com/
 timeout: 300
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH SUPPLYING COOKIE DATA
@@ -310,14 +281,12 @@ the YAML syntax for this is:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 url: http://example.com/
 cookies:
     Key: ValueForKey
     OtherKey: OtherValue
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH COMPARING WITH SEVERAL LATEST SNAPSHOTS
@@ -328,12 +297,10 @@ into a new unknown state. You can use \fBcompared_versions\fP to do this.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 url: https://example.com/
 compared_versions: 3
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -348,12 +315,10 @@ of the \fBdate\fP command, for example:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 name: \(dqurlwatch watchdog\(dq
 command: \(dqdate\(dq
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -365,11 +330,9 @@ If you want to use Redis as a cache backend over the default SQLite3 file:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 urlwatch \-\-cache=redis://localhost:6379/
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -377,7 +340,7 @@ There is no migration path from the SQLite3 format, the cache will be empty
 the first time Redis is used.
 .SH WATCHING CHANGES ON .ONION (TOR) PAGES
 .sp
-Since pages on the \fI\%Tor Network\fP <\fBhttps://www.torproject.org\fP> are not accessible via public DNS and TCP,
+Since pages on the \X'tty: link https://www.torproject.org'\fI\%Tor Network\fP <\fBhttps://www.torproject.org\fP>\X'tty: link' are not accessible via public DNS and TCP,
 you need to either configure a Tor client as HTTP/HTTPS proxy or use the
 \fBtorify(1)\fP tool from the \fBtor\fP package (\fBapt install tor\fP on Debian,
 \fBbrew install tor\fP on macOS). Setting up Tor is out of scope for this
@@ -386,11 +349,9 @@ document. On a properly set up Tor installation, one can just prefix the
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 torify urlwatch
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH WATCHING FACEBOOK PAGE EVENTS
@@ -401,8 +362,7 @@ page (can be found by navigating to the events page on your browser):
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 url: http://m.facebook.com/PAGE/pages/permalink/?view_type=tab_events
 filter:
   \- css:
@@ -412,8 +372,7 @@ filter:
       pattern: \(aq(/events/\ed*)[^\(dq]*\(aq
       repl: \(aq\e1\(aq
   \- html2text: pyhtml2text
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH SETTING THE CONTENT WIDTH FOR HTML2TEXT (LYNX METHOD)
@@ -425,15 +384,13 @@ To set the \fBlynx\fP output width to 400 characters, use this filter setup:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 url: http://example.com/longlines.html
 filter:
   \- html2text:
       method: lynx
       width: 400
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH CONFIGURING HOW LONG BROWSER JOBS WAIT FOR PAGES TO LOAD
@@ -441,7 +398,7 @@ filter:
 For browser jobs, you can configure how long the headless browser will wait
 before a page is considered loaded by using the \fBwait_until\fP option.
 .sp
-It can take one of four values (see \fI\%wait_until docs\fP <\fBhttps://playwright.dev/python/docs/api/class-page#page-goto-option-wait-until\fP> of Playwright):
+It can take one of four values (see \X'tty: link https://playwright.dev/python/docs/api/class-page#page-goto-option-wait-until'\fI\%wait_until docs\fP <\fBhttps://playwright.dev/python/docs/api/class-page#page-goto-option-wait-until\fP>\X'tty: link' of Playwright):
 .INDENT 0.0
 .INDENT 3.5
 .INDENT 0.0
@@ -470,12 +427,10 @@ the job report as \fBCHANGED\fP instead of \fBNEW\fP the first time it is retrie
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 url: http://example.com/initialpage.html
 treat_new_as_changed: true
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -492,8 +447,7 @@ the URLs, like this:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 name: \(dqLooking for Thing A\(dq
 url: http://example.com/#1
 filter:
@@ -503,8 +457,7 @@ name: \(dqLooking for Thing B\(dq
 url: http://example.com/#2
 filter:
   \- grep: \(dqThing B\(dq
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH UPDATING A URL AND KEEPING PAST HISTORY
@@ -515,11 +468,9 @@ no history.  Retain history by using \fB\-\-change\-location\fP:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 urlwatch \-\-change\-location http://example.org#old http://example.org#new
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -533,11 +484,9 @@ jobs with index 2, 4, and 7:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 urlwatch 2 4 7
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH SENDING HTML FORM DATA USING POST
@@ -547,16 +496,14 @@ the form fields in the \fBdata\fP field of the job description:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 name: \(dqMy POST Job\(dq
 url: http://example.com/foo
 data:
   username: \(dqfoo\(dq
   password: \(dqbar\(dq
   submit: \(dqSend query\(dq
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -569,16 +516,34 @@ allowing you to send arbitrary requests to the server:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 name: \(dqMy PUT Request\(dq
 url: http://example.com/item/new
 method: PUT
 headers:
   Content\-type: application/json
 data: \(aq{\(dqfoo\(dq: true}\(aq
-.ft P
-.fi
+.EE
+.UNINDENT
+.UNINDENT
+.SH SENDING JSON DATA USING POST
+.sp
+For JSON API endpoints, set \fBjson: true\fP alongside \fBdata\fP (as a native
+YAML mapping). urlwatch will serialize \fBdata\fP to JSON and set
+\fBContent\-type\fP to \fBapplication/json\fP automatically. As with plain
+\fBdata\fP, the HTTP method defaults to \fBPOST\fP:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+name: \(dqMy JSON API Job\(dq
+url: http://example.com/api/query
+json: true
+data:
+  query: \(dqstatus\(dq
+  limit: 10
+  tags: [\(dqfoo\(dq, \(dqbar\(dq]
+.EE
 .UNINDENT
 .UNINDENT
 .SH SEE ALSO
@@ -599,32 +564,27 @@ see an issue like the following when \fBurlwatch\fP parses your config files:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 UnicodeDecodeError: \(aqcharmap\(aq codec can\(aqt decode byte 0x9d in position 214: character maps to <undefined>
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
 To work around this issue, Python 3.7 and newer have a new
-\fI\%UTF\-8 Mode\fP <\fBhttps://peps.python.org/pep-0540/\fP> that can be enabled by setting the environment
+\X'tty: link https://peps.python.org/pep-0540/'\fI\%UTF\-8 Mode\fP <\fBhttps://peps.python.org/pep-0540/\fP>\X'tty: link' that can be enabled by setting the environment
 variable \fBPYTHONUTF8\fP to \fB1\fP:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 set PYTHONUTF8=1
 urlwatch
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
 You can also add this environment variable to your user environment or system
 environment to apply the UTF\-8 Mode to all Python programs on your machine.
-.SH COPYRIGHT
+.SH Copyright
 2024 Thomas Perl
-.\" Generated by docutils manpage writer.
-.
+.\" End of generated man page.
