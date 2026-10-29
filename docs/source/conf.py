@@ -81,3 +81,30 @@ man_make_section_directory = True
 
 # Distros/packagers can override this to point to their manpages web service
 manpages_url = 'https://manpages.debian.org/{path}'
+
+
+# docutils >= 0.22 binds visit_reference/depart_reference on the translator
+# instance, which shadows Sphinx's implementation (and man_show_urls with it),
+# and no longer provides the 'reference' font definition Sphinx relies on.
+from docutils import nodes  # noqa: E402
+from sphinx import addnodes  # noqa: E402
+from sphinx.writers.manpage import ManualPageTranslator  # noqa: E402
+
+
+class SphinxReferenceManualPageTranslator(ManualPageTranslator):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.__dict__.pop('visit_reference', None)
+        self.__dict__.pop('depart_reference', None)
+        self.defs.setdefault('reference', (r'\fI\%', r'\fP'))
+
+    def visit_reference(self, node):
+        # Render :manpage: links as plain names, not with a manpages_url URL
+        if isinstance(node.parent, addnodes.manpage):
+            self.visit_Text(node)
+            raise nodes.SkipNode
+        super().visit_reference(node)
+
+
+def setup(app):
+    app.set_translator('man', SphinxReferenceManualPageTranslator)
