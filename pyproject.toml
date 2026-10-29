@@ -30,7 +30,10 @@ Source = "https://github.com/thp/urlwatch"
 Issues = "https://github.com/thp/urlwatch/issues"
 
 [project.optional-dependencies]
-docs = ["Sphinx"]
+docs = [
+    "Sphinx",
+    "docutils>=0.22",
+]
 
 browser = ["playwright"]
 
@@ -42,7 +45,7 @@ dev = [
     "build",
     "twine",
     "pycodestyle==2.14.0",
-    "docutils",
+    "docutils>=0.22",
 ]
 
 extras = [
